@@ -45,20 +45,80 @@ A Parallel in Parallel out (PIPO) shift register is used as a temporary storage 
 
 
 
-### PROGRAM 
+### PROGRAM (Serial Input Parallel Output (SIPO)):
+
+
 /*
 Program for  Implementation-of Shift-registers-using-verilog-
-Developed by: 
-RegisterNumber:  
+Developed by: Bharath K
+RegisterNumber:  22009080
 */
+````
+module SIPO(SI,Clk,PO);
+input SI,Clk;
+output[0:7]PO;
+reg[0:7]temp;
+always@(posedge Clk)
+begin
+temp = {temp[0:6],SI};
+end
+assign PO = temp;
+endmodule
 
-
-
-
-
+````
 
 ### RTL LOGIC  REGISTERS   
+![output](/213880397-c0d31fd8-181a-4a3f-9a86-6469e28f37c0.png)
+### TIMING DIGRAMS FOR SHIFT REGISTERS
+![output](/213880561-26ac0b34-4fc9-43bc-bcdf-a36107facf51.png)
 
+## PROGRAM (Parallel Input Serial Output (PISO))
+
+Program for  Implementation-of Shift-registers-using-verilog-
+
+Developed by: Bharath K
+
+RegisterNumber: 22009080
+```
+
+ module PISO(Clk, Parallel_In,load, Serial_Out);
+ input Clk,load;
+ input [3:0]Parallel_In;
+ output reg Serial_Out;
+ reg [3:0]tmp;
+ always @(posedge Clk)
+ begin
+ if(load)
+ tmp<=Parallel_In;
+ else
+ begin
+ Serial_Out<=tmp[3];
+ tmp<={tmp[2:0],1'b0};
+ endmodule
+```
+### RTL LOGIC  REGISTERS   
+![output](/213880444-89bea996-bab8-4dd5-b564-d3da1bb65a9d.png)
+
+### TIMING DIGRAMS FOR SHIFT REGISTERS
+![output](/213880598-04994991-eeea-47ca-85b9-8cb46d684934.png)
+## PROGRAM (Parallel Input Parallel Output (PIPO)
+
+  Program for  Implementation-of Shift-registers-using-verilog-
+  Developed by: Bharath K
+  RegisterNumber: 22009080
+```
+module PIPO(PI,Clk,PO);
+input Clk;
+input[3:0]PI;
+output reg[3:0]PO;
+always@(posedge Clk)
+begin
+PO = PI;
+end 
+endmodul
+```
+### RTL LOGIC  REGISTERS   
+![output](/213880847-d5e17c76-7137-45a8-bb48-fcfc43144163.png)
 
 
 
@@ -69,7 +129,7 @@ RegisterNumber:
 
 ### TIMING DIGRAMS FOR SHIFT REGISTERS
 
-
+![output](/213880816-e81279e1-3245-4726-92ba-87cee3fbca2a.png)
 
 
 
@@ -77,3 +137,4 @@ RegisterNumber:
 
 
 ### RESULTS 
+Thus, PISO , PIPO, SIPO are implemented using verilog and their functionality using their functional tables is validated.
